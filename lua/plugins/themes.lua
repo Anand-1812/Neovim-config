@@ -1,8 +1,9 @@
+-- Tokyonight Theme Configuration
 return {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    opts = { style = "moon" },
+    'folke/tokyonight.nvim',  -- Ensure Tokyonight plugin is loaded
     config = function()
-        vim.cmd("colorscheme tokyonight")
+        -- Set Tokyonight as the colorscheme
+        vim.cmd.colorscheme('tokyonight')
     end
 }
+

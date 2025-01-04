@@ -11,6 +11,21 @@ vim.g.mapleader = vim.g.mapleader or " "  -- Use space as leader key, but respec
 -- UI settings
 vim.opt.number = true         -- Enable absolute line numbers
 vim.opt.relativenumber = true -- Enable relative line numbers for better navigation
+vim.opt.cursorline = true          -- Highlight the current line
+vim.opt.signcolumn = "yes"         -- Always show the sign column
+vim.opt.termguicolors = true       -- Enable true color support
+vim.opt.wrap = true                -- Wrap long lines
+vim.opt.linebreak = true           -- Break lines at word boundaries
+vim.opt.scrolloff = 8              -- Keep 8 lines visible above/below the cursor
+vim.opt.sidescrolloff = 8          -- Keep 8 columns visible left/right of the cursor
+vim.opt.splitbelow = true          -- Open horizontal splits below
+vim.opt.splitright = true          -- Open vertical splits to the right
+vim.opt.cmdheight = 2              -- More space in command line for messages
+vim.opt.winblend = 10              -- Transparency for floating windows
+vim.opt.pumblend = 10              -- Transparency for popup menus
+vim.opt.foldmethod = "indent"      -- Use indentation for folding
+vim.opt.foldlevel = 99             -- Open folds by default
+vim.opt.foldenable = false         -- Disable folding by default
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

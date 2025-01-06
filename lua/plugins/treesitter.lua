@@ -34,7 +34,7 @@ return {
 
             -- Install additional language parsers
             ensure_installed = {
-                "python", "javascript", "lua", "go", "rust", "cpp", "html", "css", "typescript", "json", "yaml", "toml", "bash", "markdown", "gitcommit"
+                "python", "javascript", "lua", "go", "rust", "cpp", "html", "css", "typescript", "json", "yaml", "toml", "bash", "markdown", "gitcommit", "ruby"
             },
         })
     end

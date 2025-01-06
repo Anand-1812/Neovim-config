@@ -49,6 +49,8 @@ end
 -- Add lazy.nvim to runtime path
 vim.opt.rtp:prepend(lazypath)
 
+vim.keymap.set("n", "<leader>ls", ":!live-server %:p:h<CR>", { noremap = true, silent = true })
+
 -- Initialize lazy.nvim
 local opts = {} -- Add any specific options here if needed
 require("lazy").setup("plugins", opts)

@@ -24,7 +24,7 @@ return {
 
             -- List of language servers to setup
             local servers = {
-                "lua_ls", "clangd", "ts_ls", "pyright", "jdtls", "ruby_lsp", "html", "cssls", "eslint"
+                "lua_ls", "clangd", "ts_ls", "pyright", "jdtls", "rubyfmt", "html", "cssls", "eslint"
             }
 
             -- Setup each language server with default capabilities

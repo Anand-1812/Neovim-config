@@ -24,7 +24,7 @@ return {
 
             -- List of language servers to setup
             local servers = {
-                "lua_ls", "clangd", "ts_ls", "pyright", "jdtls", "rubyfmt", "html", "cssls", "eslint"
+                "lua_ls", "clangd", "tsserver", "pyright", "jdtls", "solargraph", "html", "cssls", "eslint"
             }
 
             -- Setup each language server with default capabilities
@@ -33,6 +33,19 @@ return {
                     capabilities = capabilities
                 })
             end
+
+            -- Special configuration for Solargraph (Ruby)
+            lspconfig.solargraph.setup({
+                cmd = { "solargraph", "stdio" },
+                filetypes = { "ruby" },
+                root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+                settings = {
+                    solargraph = {
+                        diagnostics = true
+                    }
+                },
+                capabilities = capabilities
+            })
 
             -- Key mappings for LSP functionality
             local opts = { noremap = true, silent = true }

@@ -10,6 +10,8 @@ return {
                 null_ls.builtins.formatting.stylua,   -- Lua formatter
                 null_ls.builtins.formatting.prettier, -- Prettier for JavaScript, HTML, etc.
                 -- You can add more built-ins here, like eslint_d, black, etc.
+                null_ls.builtins.diagnostics.rubocop,
+                null_ls.builtins.formatting.rubocop,
             },
             on_attach = function(client)
                 -- Check if the LSP client supports document formatting using the updated field

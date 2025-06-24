@@ -1,76 +1,68 @@
 return {
-	-- LSP Installer
 	{
-		"kabouzeid/nvim-lspinstall",
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
 		config = function()
-			require("lspinstall").setup()
-
-			local lspconfig = require("lspconfig")
-			local cmp_caps = require("cmp_nvim_lsp").default_capabilities()
-
-			local function setup_servers()
-				require("lspinstall").setup()
-				for _, srv in ipairs(require("lspinstall").installed_servers()) do
-					lspconfig[srv].setup({
-						capabilities = cmp_caps,
-						on_attach = function(client, bufnr)
-							local opts = { buffer = bufnr, noremap = true, silent = true }
-							vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
-							vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, opts)
-							vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-							vim.keymap.set("n", "<leader>f", function()
-								vim.lsp.buf.format({ async = true })
-							end, opts)
-						end,
-					})
-				end
-			end
-
-			setup_servers()
-			require("lspinstall").post_install_hook = function()
-				setup_servers()
-				vim.cmd("bufdo e")
-			end
+			require("mason").setup()
 		end,
 	},
-
-	-- Completion via nvim-cmp
 	{
-		"hrsh7th/nvim-cmp",
+		"neovim/nvim-lspconfig",
+		config = function()
+			-- This will be configured by mason-lspconfig
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
 		},
 		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			require("luasnip.loaders.from_vscode").lazy_load()
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"lua_ls",
+					"ts_ls",
+					"pyright",
+					"clangd",
+					"html",
+					"cssls",
+					"jsonls",
+					"solargraph",
 				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				}),
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
+				automatic_installation = true,
+				automatic_enable = false, -- Disable automatic enabling to avoid the error
 			})
+
+			-- Setup LSP servers after mason-lspconfig
+			local lspconfig = require("lspconfig")
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			local servers = {
+				"lua_ls",
+				"ts_ls",
+				"pyright",
+				"clangd",
+				"html",
+				"cssls",
+				"jsonls",
+				"solargraph",
+			}
+
+			for _, server in ipairs(servers) do
+				lspconfig[server].setup({
+					capabilities = capabilities,
+					on_attach = function(_, bufnr)
+						local opts = { buffer = bufnr, noremap = true, silent = true }
+						vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
+						vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, opts)
+						vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+						vim.keymap.set("n", "<leader>f", function()
+							vim.lsp.buf.format({ async = true })
+						end, opts)
+					end,
+				})
+			end
 		end,
 	},
 }

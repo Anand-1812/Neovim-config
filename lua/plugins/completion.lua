@@ -18,11 +18,12 @@ return {
     "hrsh7th/nvim-cmp",
     config = function()
       local cmp = require("cmp")
+      local luasnip = require("luasnip")
 
       cmp.setup({
         snippet = {
           expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         window = {
@@ -43,15 +44,6 @@ return {
           { name = "buffer" },
         }),
       })
-    end,
-  },
-
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      local lspconfig = require("lspconfig")
-      lspconfig.pyright.setup({})
-      lspconfig.tsserver.setup({})
     end,
   },
 }

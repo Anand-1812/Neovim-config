@@ -1,25 +1,33 @@
 return {
-    "nvimtools/none-ls.nvim",  -- Ensure null-ls is installed
-    config = function()
-        local null_ls = require("null-ls")
+  "nvimtools/none-ls.nvim",
 
-        -- Configure null-ls with formatting sources
-        null_ls.setup({
-            sources = {
-                -- Add more sources as needed for linting, formatting, etc.
-                null_ls.builtins.formatting.stylua,   -- Lua formatter
-                null_ls.builtins.formatting.prettier, -- Prettier for JavaScript, HTML, etc.
-                -- You can add more built-ins here, like eslint_d, black, etc.
-                null_ls.builtins.diagnostics.rubocop,
-                null_ls.builtins.formatting.rubocop,
-            },
-            on_attach = function(client)
-                -- Check if the LSP client supports document formatting using the updated field
-                if client.server_capabilities.documentFormattingProvider then
-                    vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { buffer = 0, noremap = true, silent = true })
-                end
+  config = function()
+    local null_ls = require("null-ls")
+
+    null_ls.setup({
+      sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.rubocop,
+        null_ls.builtins.formatting.rubocop,
+      },
+
+      on_attach = function(client, bufnr)
+        if client.server_capabilities.documentFormattingProvider then
+          vim.keymap.set("n", "<leader>gf", function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+          end, { noremap = true, silent = true, desc = "Format buffer" })
+
+          -- Optional: Autoformat on save
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = bufnr })
             end,
-        })
-    end,
+          })
+        end
+      end,
+    })
+  end,
 }
 

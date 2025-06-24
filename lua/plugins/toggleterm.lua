@@ -1,18 +1,27 @@
 return {
-    "akinsho/toggleterm.nvim",
-    config = function()
-        require("toggleterm").setup({
-            size = 80,  -- Terminal size
-            open_mapping = [[<C-\>]],  -- Keybinding to open terminal
-            direction = 'vertical',   -- Open terminal in vertical mode (can also use 'horizontal')
-            float_opts = {
-                border = 'curved',  -- Border style for the floating terminal
-            },
-            highlights = {
-                Normal = { fg = "#c0caf5", bg = "#1a1b26" },  -- Adjust text and background color
-                NormalFloat = { fg = "#f8f8f2", bg = "#282a36" },  -- Floating terminal colors
-            }
-        })
-    end
+  "akinsho/toggleterm.nvim",
+  version = "*",
+
+  config = function()
+    require("toggleterm").setup({
+      size = 80,
+      open_mapping = [[<C-\>]],
+      start_in_insert = true,
+      direction = "vertical",
+      persist_size = true,
+      shade_terminals = true,
+      shading_factor = 2,
+
+      float_opts = {
+        border = "curved",
+        winblend = 0,
+      },
+
+      highlights = {
+        Normal = { fg = "#c0caf5", bg = "#1a1b26" },
+        NormalFloat = { fg = "#f8f8f2", bg = "#282a36" },
+      },
+    })
+  end,
 }
 

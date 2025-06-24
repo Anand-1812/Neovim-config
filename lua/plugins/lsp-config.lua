@@ -10,7 +10,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        auto_install = true,
+        automatic_installation = true,
       })
     end,
   },
@@ -22,8 +22,15 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local servers = {
-        "lua_ls", "clangd", "tsserver", "pyright",
-        "jdtls", "solargraph", "html", "cssls", "eslint"
+        "lua_ls",
+        "clangd",
+        "tsserver",
+        "pyright",
+        "jdtls",
+        "solargraph",
+        "html",
+        "cssls",
+        "eslint",
       }
 
       for _, server in ipairs(servers) do
@@ -57,4 +64,3 @@ return {
     end,
   },
 }
-

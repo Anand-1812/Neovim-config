@@ -1,9 +1,24 @@
--- Tokyonight Theme Configuration
 return {
-    'folke/tokyonight.nvim',  -- Ensure Tokyonight plugin is loaded
-    config = function()
-        -- Set Tokyonight as the colorscheme
-        vim.cmd.colorscheme('tokyonight')
-    end
+  "folke/tokyonight.nvim",
+
+  priority = 1000, -- Load before other plugins
+
+  config = function()
+    require("tokyonight").setup({
+      style = "night",         -- Options: "storm", "moon", "night", "day"
+      transparent = false,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = {},
+        variables = {},
+      },
+      dim_inactive = true,
+      lualine_bold = true,
+    })
+
+    vim.cmd.colorscheme("tokyonight")
+  end,
 }
 

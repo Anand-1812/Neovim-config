@@ -1,31 +1,31 @@
--- Tab and indentation options
-vim.opt.expandtab = true      -- Use spaces instead of tabs
-vim.opt.tabstop = 4           -- Number of spaces tabs count for
-vim.opt.softtabstop = 4       -- Number of spaces tabs count for in insert mode
-vim.opt.shiftwidth = 4        -- Number of spaces for autoindent
-vim.opt.smartindent = true    -- Enable smart indentation
+-- Tab and indentation
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = true
 
--- Global leader key
-vim.g.mapleader = vim.g.mapleader or " "  -- Use space as leader key, but respect existing settings
+-- Leader key
+vim.g.mapleader = vim.g.mapleader or " "
 
 -- UI settings
-vim.opt.number = true         -- Enable absolute line numbers
-vim.opt.relativenumber = true -- Enable relative line numbers for better navigation
-vim.opt.cursorline = true          -- Highlight the current line
-vim.opt.signcolumn = "yes"         -- Always show the sign column
-vim.opt.termguicolors = true       -- Enable true color support
-vim.opt.wrap = true                -- Wrap long lines
-vim.opt.linebreak = true           -- Break lines at word boundaries
-vim.opt.scrolloff = 8              -- Keep 8 lines visible above/below the cursor
-vim.opt.sidescrolloff = 8          -- Keep 8 columns visible left/right of the cursor
-vim.opt.splitbelow = true          -- Open horizontal splits below
-vim.opt.splitright = true          -- Open vertical splits to the right
-vim.opt.cmdheight = 2              -- More space in command line for messages
-vim.opt.winblend = 10              -- Transparency for floating windows
-vim.opt.pumblend = 10              -- Transparency for popup menus
-vim.opt.foldmethod = "indent"      -- Use indentation for folding
-vim.opt.foldlevel = 99             -- Open folds by default
-vim.opt.foldenable = false         -- Disable folding by default
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.signcolumn = "yes"
+vim.opt.termguicolors = true
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.cmdheight = 2
+vim.opt.winblend = 10
+vim.opt.pumblend = 10
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
+vim.opt.foldenable = false
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -46,11 +46,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 
--- Add lazy.nvim to runtime path
 vim.opt.rtp:prepend(lazypath)
 
+-- Key mappings
 vim.keymap.set("n", "<leader>ls", ":!live-server %:p:h<CR>", { noremap = true, silent = true })
 
 -- Initialize lazy.nvim
-local opts = {} -- Add any specific options here if needed
-require("lazy").setup("plugins", opts)
+require("lazy").setup("plugins", {})
+

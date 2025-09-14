@@ -1,50 +1,88 @@
+-- ==============================
+-- lsp-config.lua
+-- Mason + LSP Setup with nvim-lspconfig
+-- ==============================
+
 return {
-  {
-    "hrsh7th/cmp-nvim-lsp",
-  },
-
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = {
-      "saadparwaiz1/cmp_luasnip",
-      "rafamadriz/friendly-snippets",
+    -- Mason for managing LSP servers, DAP, linters, etc.
+    {
+        "williamboman/mason.nvim",
+        build = ":MasonUpdate",
+        config = function()
+            require("mason").setup()
+        end,
     },
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
-  },
 
-  {
-    "hrsh7th/nvim-cmp",
-    config = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
+    -- Base LSP config
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            -- Servers are configured via mason-lspconfig
+        end,
+    },
 
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
+    -- Mason integration with nvim-lspconfig
+    {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
         },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-        }, {
-          { name = "buffer" },
-        }),
-      })
-    end,
-  },
+        config = function()
+            local mason_lsp = require("mason-lspconfig")
+            mason_lsp.setup({
+                ensure_installed = {
+                    "lua_ls",
+                    "pyright",
+                    "ts_ls",
+                    "clangd",
+                    "gopls",
+                    "rust_analyzer",
+                    "html",
+                    "cssls",
+                    "jsonls",
+                    "yamlls",
+                },
+                automatic_installation = true,
+                automatic_enable = false,
+            })
+
+            local lspconfig = require("lspconfig")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+            local servers = {
+                "lua_ls",
+                "pyright",
+                "ts_ls",
+                "clangd",
+                "gopls",
+                "rust_analyzer",
+                "html",
+                "cssls",
+                "jsonls",
+                "yamlls",
+            }
+
+            for _, server in ipairs(servers) do
+                lspconfig[server].setup({
+                    capabilities = capabilities,
+                    on_attach = function(_, bufnr)
+                        local opts = { buffer = bufnr, noremap = true, silent = true }
+
+                        -- LSP keymaps
+                        vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
+                        vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, opts)
+                        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                        vim.keymap.set("n", "<leader>f", function()
+                            vim.lsp.buf.format({ async = true })
+                        end, opts)
+
+                        -- Simple gg=G auto-indent for entire file
+                        vim.keymap.set("n", "<leader>i", "gg=G<C-o>",
+                            { buffer = bufnr, desc = "Auto-indent entire file" })
+                    end,
+                })
+            end
+        end,
+    },
 }
-

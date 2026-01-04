@@ -19,7 +19,7 @@ return {
                 ensure_installed = {
                     "bash", "c", "cpp", "css", "gitcommit", "go", "html",
                     "javascript", "json", "lua", "markdown", "python",
-                    "ruby", "rust", "toml", "typescript", "yaml",
+                    "ruby", "rust", "toml", "typescript", "tsx", "yaml", -- 👈 added tsx
                 },
                 auto_install = true,
                 highlight = {
@@ -95,4 +95,3 @@ return {
         end,
     },
 }
-

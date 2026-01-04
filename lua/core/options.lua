@@ -1,36 +1,41 @@
 -- ==============================
 -- options.lua
--- UI and editing options
+-- Core editor behavior
 -- ==============================
 
--- Tabs & indentation
-vim.opt.expandtab       = true
-vim.opt.tabstop         = 4
-vim.opt.softtabstop     = 4
-vim.opt.shiftwidth      = 4
-vim.opt.smartindent     = true
+-- Leader
+vim.g.mapleader = " "
 
--- Leader key
-vim.g.mapleader = vim.g.mapleader or " "
+-- Indentation: enforce 2 spaces everywhere
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.smartindent = true
+
+-- Line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- UI
-vim.opt.number          = true
-vim.opt.relativenumber  = true
-vim.opt.cursorline      = true
-vim.opt.signcolumn      = "yes"
-vim.opt.termguicolors   = true
-vim.opt.wrap            = true
-vim.opt.linebreak       = true
-vim.opt.scrolloff       = 8
-vim.opt.sidescrolloff   = 8
-vim.opt.splitbelow      = true
-vim.opt.splitright      = true
-vim.opt.cmdheight       = 2
-vim.opt.winblend        = 10
-vim.opt.pumblend        = 10
+vim.opt.cursorline = true
+vim.opt.signcolumn = "yes"
+vim.opt.termguicolors = true
+vim.opt.wrap = false
 
--- Folding
-vim.opt.foldmethod      = "indent"
-vim.opt.foldlevel       = 99
-vim.opt.foldenable      = false
+-- Scrolling comfort
+vim.opt.scrolloff = 6
+vim.opt.sidescrolloff = 8
 
+-- Window behavior
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+-- Folding (safe defaults)
+vim.opt.foldmethod = "indent"
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
+
+-- Popup polish
+vim.opt.winblend = 0
+vim.opt.pumblend = 0

@@ -1,26 +1,34 @@
 -- ==============================
 -- autocommands.lua
--- Custom autocommands
+-- Small quality-of-life automations
 -- ==============================
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Highlight yanked text
+-- Highlight text after yank
 autocmd("TextYankPost", {
-    group = augroup("YankHighlight", {}),
-    pattern = "*",
-    callback = function()
-        vim.highlight.on_yank({ timeout = 200 })
-    end,
+  group = augroup("YankHighlight", {}),
+  callback = function()
+    vim.highlight.on_yank({ timeout = 200 })
+  end,
 })
 
--- Automatically remove trailing whitespace on save
+-- Remove trailing whitespace on save
 autocmd("BufWritePre", {
-    group = augroup("TrimWhitespace", {}),
-    pattern = "*",
-    callback = function()
-        vim.cmd([[%s/\s\+$//e]])
-    end,
+  group = augroup("TrimWhitespace", {}),
+  callback = function()
+    vim.cmd([[%s/\s\+$//e]])
+  end,
 })
 
+-- Better diagnostics UI
+vim.diagnostic.config({
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+  },
+})

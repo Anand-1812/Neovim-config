@@ -3,8 +3,11 @@
 -- Core editor behavior
 -- ==============================
 
--- Leader
+-- Suppress the nvim-lspconfig deprecation warning (Neovim 0.11+)
+vim.g.lspconfig_framework_deprecation = false
+
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Indentation: enforce 2 spaces everywhere
 vim.opt.expandtab = true
@@ -39,3 +42,8 @@ vim.opt.foldlevel = 99
 -- Popup polish
 vim.opt.winblend = 0
 vim.opt.pumblend = 0
+
+-- Leader timeout behavior
+vim.opt.timeout = true
+vim.opt.timeoutlen = 400
+

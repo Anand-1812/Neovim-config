@@ -3,7 +3,12 @@
 -- Main entry point
 -- ==============================
 
+-- ------------------------------------------------
+-- Leader key (MUST be set before anything else)
+-- ------------------------------------------------
+-- ------------------------------------------------
 -- Bootstrap lazy.nvim
+-- ------------------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.loop or vim.uv).fs_stat(lazypath) then
   vim.fn.system({
@@ -17,10 +22,15 @@ if not (vim.loop or vim.uv).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load core settings
+-- ------------------------------------------------
+-- Core configuration
+-- ------------------------------------------------
 require("core.options")
 require("core.keymaps")
 require("core.autocommands")
 
--- Load plugins via Lazy.nvim
+-- ------------------------------------------------
+-- Plugins
+-- ------------------------------------------------
 require("lazy").setup(require("plugins"))
+

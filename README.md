@@ -1,7 +1,6 @@
 # Neovim Config
 
-**Modern Neovim IDE • Native LSP • Neovim 0.11+**  
-A clean, minimal Neovim configuration focused on correctness, speed, and long-term stability.
+**Modern Neovim IDE • Native LSP • Neovim 0.11+** A clean, minimal Neovim configuration focused on correctness, speed, and long-term stability.
 
 <p align="center">
   Built with native Neovim APIs · No deprecated frameworks · Easy to understand
@@ -22,13 +21,11 @@ A clean, minimal Neovim configuration focused on correctness, speed, and long-te
 
 ## Supported Languages
 
-| Language |
-|---------|
-| Lua |
-| Python |
-| C / C++ |
-| JavaScript / TypeScript / TSX |
-| Tailwind CSS |
+- Lua
+- Python
+- C / C++
+- JavaScript / TypeScript / TSX
+- Tailwind CSS
 
 ---
 
@@ -36,16 +33,17 @@ A clean, minimal Neovim configuration focused on correctness, speed, and long-te
 
 | Step | Command |
 |------|--------|
-| Backup existing config | mv ~/.config/nvim ~/.config/nvim.backup |
-| Clone repository | git clone https://github.com/<your-username>/<repo-name>.git ~/.config/nvim |
-| Start Neovim | nvim |
+| **1. Backup** | `mv ~/.config/nvim ~/.config/nvim.backup` |
+| **2. Clone** | `git clone "https://github.com/<your-username>/<repo-name>.git" ~/.config/nvim` |
+| **3. Start** | `nvim` |
 
-On first launch, plugins are installed automatically using lazy.nvim. Restart Neovim once setup completes.
+> **Note:** On first launch, plugins are installed automatically using `lazy.nvim`. Restart Neovim once setup completes.
 
 ---
 
 ## Directory Structure
 
+```text
 ~/.config/nvim
 ├── init.lua
 └── lua
@@ -62,76 +60,49 @@ On first launch, plugins are installed automatically using lazy.nvim. Restart Ne
         ├── completion.lua
         ├── none-ls.lua
         └── mason.lua
+```
 
 ---
 
 ## Key Bindings
 
-Leader key: Space
+**Leader key:** `Space`
 
 ### Navigation
 
-| Key | Action |
-|----|-------|
-| <leader>e | Toggle file explorer |
-| <leader>ff | Find files |
-| <leader>fg | Live grep |
-| <leader>fb | Buffers |
-| <leader>fh | Help |
+- `<leader>e` — Toggle file explorer
+- `<leader>ff` — Find files
+- `<leader>fg` — Live grep (search text)
+- `<leader>fb` — Find buffers
+- `<leader>fh` — Help tags
 
-### LSP
+### LSP (Language Server)
 
-| Key | Action |
-|----|-------|
-| gd | Go to definition |
-| gr | References |
-| K | Hover documentation |
-| <leader>rn | Rename symbol |
-| <leader>ca | Code actions |
-| <leader>f | Format file |
+- `gd` — Go to definition
+- `gr` — Find references
+- `K` — Hover documentation
+- `<leader>rn` — Rename symbol
+- `<leader>ca` — Code actions
+- `<leader>f` — Format file
 
 ### Completion
 
-| Key | Action |
-|----|-------|
-| Ctrl+Space | Trigger completion |
-| Enter | Confirm completion |
-| Tab / Shift+Tab | Navigate items or snippets |
+- `Ctrl + Space` — Trigger completion manually
+- `Enter` — Confirm selection
+- `Tab` — Select next item
+- `Shift + Tab` — Select previous item
 
 ---
 
 ## Formatting
 
-| Language | Tool |
-|---------|------|
-| Lua | stylua |
-| Python | black, isort |
-| JS / TS / CSS / HTML | prettierd |
+Format the current file with `<leader>f`.
 
-Format the current file with: <leader>f
+- **Lua:** `stylua`
+- **Python:** `black`, `isort`
+- **JS / TS / CSS / HTML:** `prettierd`
 
 ---
-
-## TypeScript / React
-
-| Requirement | Notes |
-|------------|------|
-| react | Required for TSX |
-| react-dom | Required for TSX |
-| @types/react | Type definitions |
-| @types/react-dom | Type definitions |
-| tsconfig.json | JSX must be enabled |
-
----
-
-## Philosophy
-
-| Principle |
-|----------|
-| Native Neovim APIs only |
-| No deprecated frameworks |
-| Explicit over implicit |
-| Predictable and maintainable |
 
 Built to stay stable across Neovim updates.
 
@@ -140,4 +111,3 @@ Built to stay stable across Neovim updates.
 ## License
 
 MIT
-"""

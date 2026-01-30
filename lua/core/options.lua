@@ -1,49 +1,24 @@
--- ==============================
--- options.lua
--- Core editor behavior
--- ==============================
+local opt = vim.opt
 
--- Suppress the nvim-lspconfig deprecation warning (Neovim 0.11+)
-vim.g.lspconfig_framework_deprecation = false
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.smartindent = true
 
--- Indentation: enforce 2 spaces everywhere
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
-vim.opt.smartindent = true
+opt.wrap = false
+opt.scrolloff = 8
+opt.sidescrolloff = 8
 
--- Line numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
+opt.termguicolors = true
+opt.signcolumn = "yes"
 
--- UI
-vim.opt.cursorline = true
-vim.opt.signcolumn = "yes"
-vim.opt.termguicolors = true
-vim.opt.wrap = false
+opt.splitbelow = true
+opt.splitright = true
 
--- Scrolling comfort
-vim.opt.scrolloff = 6
-vim.opt.sidescrolloff = 8
-
--- Window behavior
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
--- Folding (safe defaults)
-vim.opt.foldmethod = "indent"
-vim.opt.foldenable = false
-vim.opt.foldlevel = 99
-
--- Popup polish
-vim.opt.winblend = 0
-vim.opt.pumblend = 0
-
--- Leader timeout behavior
-vim.opt.timeout = true
-vim.opt.timeoutlen = 400
+opt.updatetime = 250
+opt.timeoutlen = 400
 

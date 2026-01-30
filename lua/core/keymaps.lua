@@ -1,12 +1,13 @@
--- ==============================
--- keymaps.lua
--- Custom key mappings
--- ==============================
+local map = vim.keymap.set
 
-local opts = { noremap = true, silent = true }
+-- Better defaults
+map("n", "<Esc>", "<cmd>nohlsearch<CR>")
+map("n", "<leader>w", "<cmd>w<CR>")
+map("n", "<leader>q", "<cmd>q<CR>")
 
--- Example keymaps
-vim.keymap.set("n", "<leader>ls", ":!live-server %:p:h<CR>", opts)
-vim.keymap.set("n", "<leader>w", ":w<CR>", opts)
-vim.keymap.set("n", "<leader>q", ":q<CR>", opts)
+-- Window navigation
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
 

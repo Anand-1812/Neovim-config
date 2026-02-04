@@ -14,8 +14,18 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
-    -- Load snippets (JS/TS/React included)
+    -- Load VSCode-style snippets (JS/TS/React included)
     require("luasnip.loaders.from_vscode").lazy_load()
+
+    -- Helper: check if cursor has words before it
+    local has_words_before = function()
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      if col == 0 then
+        return false
+      end
+      local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+      return text:sub(col, col):match("%s") == nil
+    end
 
     cmp.setup({
       completion = {
@@ -37,8 +47,10 @@ return {
             cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
           else
-            fallback()
+            fallback() -- normal indentation
           end
         end, { "i", "s" }),
 
@@ -62,9 +74,7 @@ return {
 
       formatting = {
         fields = { "abbr", "kind", "menu" },
-
         format = function(entry, item)
-          -- Minimal, readable icons only
           local kind_icons = {
             Function = "󰊕",
             Method = "󰆧",
@@ -81,7 +91,6 @@ return {
           }
 
           item.kind = (kind_icons[item.kind] or "") .. " " .. item.kind
-
           item.menu = ({
             nvim_lsp = "LSP",
             luasnip = "SNIP",
@@ -95,4 +104,3 @@ return {
     })
   end,
 }
-
